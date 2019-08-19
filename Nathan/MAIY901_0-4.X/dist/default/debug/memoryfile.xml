@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project>
+  <executable name="dist/default/debug/MAIY901_0-4.X.debug.elf">
+    <memory name="data">
+      <units>bytes</units>
+      <length>32768</length>
+      <used>1350</used>
+      <free>31418</free>
+    </memory>
+    <memory name="program">
+      <units>bytes</units>
+      <length>1056000</length>
+      <used>17037</used>
+      <free>1038963</free>
+    </memory>
+  </executable>
+</project>
