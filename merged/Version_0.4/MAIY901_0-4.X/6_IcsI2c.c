@@ -59,6 +59,7 @@ void TASK6 (void)
         {
             ReadI2c(EEPROM,0,7,I2C_readBuffer,&CodeErreurI2c,&TimeOutI2c);
             ReturnError(&CodeErreurI2c);
+            StrToConsole((char*)I2C_readBuffer);
             if(I2C_readBuffer[0]=='B')
             {
                 TASK[TASK6_ID].PHASE=INITIALIZED;
@@ -74,12 +75,12 @@ void TASK6 (void)
         case 3:
         {
             Date.An=19; //initialisation de la date et de l'heure
-            Date.Mois=5;
-            Date.Jour=17;
+            Date.Mois=8;
+            Date.Jour=20;
             Date.wd=2;
-            Date.Heure=21;
-            Date.Minute=48;
-            Date.Seconde=32;
+            Date.Heure=16;
+            Date.Minute=22;
+            Date.Seconde=30;
             EcritureDateHeure(&Date); TASK[TASK6_ID].STEP++;
             SET_WAIT(TASK6_ID,10);
         }
@@ -87,7 +88,7 @@ void TASK6 (void)
     {
         LectureDateHeure(&Date2);
         char test[40];
-        sprintf(test,"%02u %02u %02u %02u %02u %02u %02u \n",Date2.Seconde,Date2.Minute,Date2.Heure,Date2.Jour,Date2.wd,Date2.Mois,Date2.An);
+        sprintf(test,"%02uh%02um%02us %02u %02u %02u %02u \n",Date2.Heure,Date2.Minute,Date2.Seconde,Date2.Jour,Date2.wd,Date2.Mois,Date2.An);
         StrToConsole(test); //affiche la date lue sur la console
         SET_WAIT(TASK6_ID,1000);
         TASK[TASK6_ID].STEP++;
@@ -555,7 +556,7 @@ return(Retour);
 
 unsigned char ReturnError(unsigned char* CodeErreur) // Permet d'afficher l'erreur si elle a lieu sur la console pour le déboggage
 {
-    switch (CodeErreur)
+    switch (*CodeErreur)
     {
         case 1:
         {

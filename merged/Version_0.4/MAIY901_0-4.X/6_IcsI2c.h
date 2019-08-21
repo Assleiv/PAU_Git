@@ -51,6 +51,7 @@ extern struct STR_DATE Date2;//Date reçu
 *******************************************************************************/
 // <editor-fold defaultstate="collapsed" desc="">
 extern volatile unsigned int TimeOutI2c;
+extern  unsigned char CodeErreurI2c;
 // </editor-fold>
 /*******************************************************************************
 *                               FONCTIONS                                      *

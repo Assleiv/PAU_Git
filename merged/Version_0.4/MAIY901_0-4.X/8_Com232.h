@@ -41,7 +41,7 @@ extern void Init_Uart2(void);
 extern void ReceiveUart2(void);
 extern void GsmToUc2(volatile unsigned char* DataRx);
 extern void DebutTraceDebugConsole(void);
-extern void StrToConsole(unsigned char *data);
+extern void StrToConsole(char *data);
 // </editor-fold>
 
 #endif

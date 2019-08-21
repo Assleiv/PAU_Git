@@ -3414,7 +3414,7 @@ unsigned char Retour;
 
 Retour=0;
 
-while(isdigit(*CodePin))
+while(isnumber(*CodePin))
   {
   CodePin++;
   Retour++;

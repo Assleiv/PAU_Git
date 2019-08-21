@@ -7,7 +7,7 @@
 *		SETTINGS        *
 ************************/
 // <editor-fold defaultstate="collapsed" desc="">
-#define TIMEOUT_I2C     100 //en ms, temps de traitement max avant déclanchement d'un défaut
+#define TIMEOUT_I2C     200 //en ms, temps de traitement max avant déclanchement d'un défaut
 #define BAUD_RATE_I2C   76  //à 16MHz : 100kHz->76, 400kHz->18
 #define SIZE_I2C_RX     10  //en octet, taille du buffer de réception I2C
 #define SIZE_I2C_TX     70  //en octet, taille du buffer de transmission I2C
@@ -23,21 +23,34 @@
 #define _I2C_SCL            LATGbits.LATG2
 #define I2C_DATA            I2C_writeBuffer[0]
 #define PT_I2C_DATA         &I2C_writeBuffer[0]
-#define EEPROM              0b01010000   //adresse I2C de l'EEPROM
-#define EE_SLAVE_ADDR_2	0xA6
-#define EE_SLAVE_ADDR_3	0xA4
-#define MAX_EE_ADDR		0x07FF //Adresse la plus haute possible en EEPROM (ici 256Kb => 32ko => max 7FFF)
-#define TEMPS_INTER_START_STOP 60 // x1000 cycle machines (doit faire 5ms) à 16MHz => 4Mips => 20
+#define ADR_8563_BASE_HEURE_DATE  0x02   //Registre de l'heure dans la RTC
 
+#define ADDR_I2C_RTC        0xA2         //adresse I2C de la RTC
+#define EEPROM              0b10100000   //adresse I2C de l'EEPROM
 //STEP
 #define ICSI2C_START    SET_READY(TASK6_ID);TASK[TASK6_ID].STEP=0;TASK[TASK6_ID].PHASE=AMBRION
+
+struct STR_DATE
+{
+	unsigned char Heure;    // 6 bits
+	unsigned char Minute;   // 7 bits
+	unsigned char Seconde;  // 7 bits
+	unsigned char Jour;     // 6 bits
+	unsigned char Mois;     // 5 bits on a fait le bazar :5
+	unsigned wd:3;     // 5 bits on a fait le bazar :3
+	unsigned An:5;       // 8 Bits
+};
+extern struct STR_DATE Date; //Date envoyé
+extern struct STR_DATE Date2;//Date reçu
+
+
+
 // </editor-fold>
 /*******************************************************************************
 *		                   VARIABLES GLOBALES                                  *
 *******************************************************************************/
 // <editor-fold defaultstate="collapsed" desc="">
 extern volatile unsigned int TimeOutI2c;
-extern unsigned char CodeErreurI2c;
 // </editor-fold>
 /*******************************************************************************
 *                               FONCTIONS                                      *
@@ -59,6 +72,14 @@ extern void ReadI2c(unsigned char adresseSlave, unsigned int registreSlave, unsi
 extern void DeblocageI2c(void);
 extern void I2cInit(void);
 extern void I2cEnd(void);
+extern unsigned char LectureDateHeure(struct STR_DATE *pt);
+extern unsigned char LectureRegistres_8563(unsigned char Adresse, unsigned char *DataRTC,unsigned char NbOctet);
+extern unsigned char UCharBcdToUChar(unsigned char UcBcd);
+extern unsigned char UCharToUCharBcd(unsigned char Uc);
+extern unsigned char EcritureDateHeure(struct STR_DATE *pt);
+extern unsigned char EcritureRegistres_8563(unsigned char Adresse, unsigned char *DataRTC,unsigned char NbOctet);
+extern unsigned char StrCopyToChar(unsigned char *Out,unsigned char *In);
+extern unsigned char ReturnError(unsigned char* CodeErreur);
 // </editor-fold>
 
 #endif

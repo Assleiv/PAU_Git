@@ -47,7 +47,7 @@ void TASK8 (void)
         case 1: 
         {
             StrToConsole("Coucou \r");
-            StrToConsole("blabla");
+            StrToConsole("blabla \r");
             SET_WAIT(TASK8_ID,10);
             TASK[TASK8_ID].STEP++;
             break;
@@ -176,7 +176,7 @@ void GsmToUc2(volatile unsigned char* DataRx)
     }
 }
 
-void StrToConsole(unsigned char *data)
+void StrToConsole(char *data)
     {
         unsigned char x = 30;
         do 
@@ -199,5 +199,5 @@ void StrToConsole(unsigned char *data)
     
 void DebutTraceDebugConsole(void)
         {
-            StrToConsole((unsigned char*)DEB_TRACE_DEBUG_CONS);
+            StrToConsole((char*)DEB_TRACE_DEBUG_CONS);
         }

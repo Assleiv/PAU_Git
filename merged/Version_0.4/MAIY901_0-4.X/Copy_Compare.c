@@ -82,7 +82,7 @@ unsigned char StrCopyPgmToChar(unsigned char *Out,const char *In)
         return(Retour);
     }
 /*
-unsigned char isdigit(unsigned char c)
+unsigned char isnumber(unsigned char c)
 Retourne 1 si le caractère entré est numérique
 ENTREE : c = Caractère a tester
 SORTIE : Aucune
@@ -90,7 +90,7 @@ RETOUR : 1 si caractère numérique
          0 sinon
 */
 
-unsigned char isdigit(unsigned char c)
+unsigned char isnumber(unsigned char c)
 {
 if((c>='0')&&(c<='9'))
   return 1;
@@ -116,7 +116,7 @@ Retour=0;
 // Accepte un + en debut de chaine
 if((*NumTel)=='+') NumTel++;
 
-while(isdigit(*NumTel))
+while(isnumber(*NumTel))
   {
   NumTel++;
   Retour++;

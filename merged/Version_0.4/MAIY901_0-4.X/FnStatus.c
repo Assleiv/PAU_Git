@@ -264,7 +264,7 @@ if((FrtReduit==0)&&(Lg<(SzBuf-6)))
 void FabriqueEtEmetReponseStatus(void)
 {
 FabriqueReponseStatus(Reponse,StatusPau.MotErreurPAU,0,SZ_CMD_REPONSE+1);
-StrToConsole(Reponse);
+StrToConsole((char*)Reponse);
 StrToConsole("\n");
 Reponse[0]=0;
 }
@@ -362,7 +362,7 @@ Lg+=uinttoa(DeltaPanBatCharge,&Rs[Lg]);
 void FabriqueEtEmetReponseVANA(void)
 {
 FabriqueReponseVANA(Reponse);
-StrToConsole(Reponse);
+StrToConsole((char*)Reponse);
 StrToConsole("\n");
 Reponse[0]=0;
 }

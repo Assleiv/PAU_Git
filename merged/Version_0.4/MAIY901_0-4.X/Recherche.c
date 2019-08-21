@@ -146,6 +146,7 @@ if(GsmModeFred.RequestSleep==1 && GsmModeFred.RequestOff==1)
   SetGsmMode(GSM_MODE_SLEEP);
   return GSM_MODE_SLEEP;
   }
+return 0;
 }
 
 
